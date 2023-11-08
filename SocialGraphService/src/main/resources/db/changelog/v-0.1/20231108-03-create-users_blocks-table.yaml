@@ -1,0 +1,18 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2023110803
+      author: cosqunmammadov
+      changes:
+        - createTable:
+            tableName: users_blocks
+            columns:
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: block_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
