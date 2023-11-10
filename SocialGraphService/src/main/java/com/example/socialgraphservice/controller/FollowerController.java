@@ -2,7 +2,6 @@ package com.example.socialgraphservice.controller;
 
 import com.example.socialgraphservice.service.FollowerService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
