@@ -14,5 +14,5 @@ spring:
     init:
       mode: never
   liquibase:
-    enabled: true
+    enabled: false
     change-log: classpath:db/changelog/db.changelog-master.yaml
