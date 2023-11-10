@@ -24,6 +24,10 @@ public class FollowingService {
         followingRepository.deleteFollowing(followingId);
     }
 
+    public Set<Long> getFollowingsId(Long userId){
+        return followingRepository.getFollowingsId(userId);
+    }
+
     public Set<Long> getRecommendedUsersId(Long userId){
         Set<Long> recommendedUsersId = new HashSet<>();
         Set<Long> followingUsersId = followingRepository.getFollowingsId(userId);

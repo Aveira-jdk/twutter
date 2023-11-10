@@ -24,6 +24,11 @@ public class FollowingController {
         followingService.deleteFollowing(followingId);
     }
 
+    @GetMapping("/get-followings/{userId}")
+    public Set<Long> getFollowingsId(@PathVariable Long userId){
+        return followingService.getFollowingsId(userId);
+    }
+
     @GetMapping("/get-recommended/{userId}")
     public Set<Long> getRecommendedUsersId(@PathVariable Long userId){
         return followingService.getRecommendedUsersId(userId);

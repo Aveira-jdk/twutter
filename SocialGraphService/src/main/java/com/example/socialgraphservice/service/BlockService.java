@@ -4,6 +4,8 @@ import com.example.socialgraphservice.repository.BlockRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Set;
+
 @Service
 @RequiredArgsConstructor
 public class BlockService {
@@ -16,5 +18,9 @@ public class BlockService {
 
     public void deleteBlock(Long blockId){
         blockRepository.deleteBlock(blockId);
+    }
+
+    public Set<Long> getBlocksId(Long userid){
+        return blockRepository.getBlocksId(userid);
     }
 }

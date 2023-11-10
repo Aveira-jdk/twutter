@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Set;
+
 
 @Repository
 public interface FollowerRepository extends JpaRepository<RootEntity, Long> {
@@ -24,4 +26,9 @@ public interface FollowerRepository extends JpaRepository<RootEntity, Long> {
     @Modifying
     @Query(value = "DELETE FROM users_followers WHERE follower_id =:followerId", nativeQuery = true)
     void deleteFollower(Long followerId);
+
+    @Transactional
+    @Modifying
+    @Query(value = "SELECT follower_id FROM users_followers WHERE user_id =:userId", nativeQuery = true)
+    Set<Long> getFollowersId(Long userId);
 }

@@ -2,7 +2,10 @@ package com.example.socialgraphservice.controller;
 
 import com.example.socialgraphservice.service.FollowerService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Set;
 
 @RestController
 @RequestMapping("/twutter/followers")
@@ -19,5 +22,10 @@ public class FollowerController {
     @DeleteMapping("/delete-follower/{followerId}")
     public void deleteFollower(@PathVariable Long followerId){
         followerService.deleteFollower(followerId);
+    }
+
+    @GetMapping("/get-followers/{userId}")
+    public Set<Long> getFollowersId(@PathVariable Long userId){
+        return followerService.getFollowersId(userId);
     }
 }

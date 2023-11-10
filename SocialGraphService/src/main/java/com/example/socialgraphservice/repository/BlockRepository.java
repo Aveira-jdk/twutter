@@ -8,6 +8,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Set;
+
 @Repository
 public interface BlockRepository extends JpaRepository<RootEntity, Long> {
 
@@ -21,4 +23,9 @@ public interface BlockRepository extends JpaRepository<RootEntity, Long> {
     @Modifying
     @Query(value = "DELETE FROM users_followers WHERE block_id =:blockId", nativeQuery = true)
     void deleteBlock(Long blockId);
+
+    @Transactional
+    @Modifying
+    @Query(value = "SELECT block_id FROM users_blocks WHERE user_id =:userId", nativeQuery = true)
+    Set<Long> getBlocksId(Long userId);
 }
