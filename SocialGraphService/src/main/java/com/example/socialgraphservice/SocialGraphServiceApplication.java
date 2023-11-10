@@ -1,10 +1,12 @@
 package com.example.socialgraphservice;
 
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class SocialGraphServiceApplication {
+public class SocialGraphServiceApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
         SpringApplication.run(SocialGraphServiceApplication.class, args);
