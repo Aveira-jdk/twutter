@@ -1,6 +1,7 @@
 package com.example.timelineservice.controller;
 
-import com.example.timelineservice.service.TimeLineService;
+import com.example.timelineservice.model.TimelineTweet;
+import com.example.timelineservice.service.TimelineService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,13 +13,12 @@ import java.util.Set;
 @RestController
 @RequestMapping("/twutter/time-line")
 @RequiredArgsConstructor
-public class TimeLineController {
+public class TimelineController {
 
-    private final TimeLineService timeLineService;
+    private final TimelineService timeLineService;
 
-
-    @GetMapping("/{userId}")
-    public Set<Long> getFollowings(@PathVariable Long userId){
-        return timeLineService.getFollowings(userId);
+    @GetMapping("/get-timeline-tweets/{userId}")
+    public Set<TimelineTweet> getTimelineTweets(@PathVariable Long userId){
+        return timeLineService.getTimelineTweets(userId);
     }
 }

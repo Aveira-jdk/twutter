@@ -32,4 +32,5 @@ public class FollowingController {
     public Set<Long> getRecommendedUsersId(@PathVariable Long userId){
         return followingService.getRecommendedUsersId(userId);
     }
+
 }
