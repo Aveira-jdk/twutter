@@ -25,7 +25,10 @@ public class FollowingService {
     }
 
     public Set<Long> getFollowingsId(Long userId){
-        return followingRepository.getFollowingsId(userId);
+        Set<Long> followingsId = followingRepository.getFollowingsId(userId);
+        if (followingsId.equals(null))
+            logger.warn(String.format("User with this id: %d is not following anyone", userId));
+        return followingsId;
     }
 
     public Set<Long> getRecommendedUsersId(Long userId){
