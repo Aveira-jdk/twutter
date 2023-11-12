@@ -18,10 +18,12 @@ public class FollowingService {
 
     public void addFollowing(Long userId, Long followingId){
         followingRepository.addFollowing(userId, followingId);
+        logger.info(String.format("User :id %d and following :id %d was added", userId, followingId));
     }
 
-    public void deleteFollowing(Long followingId){
-        followingRepository.deleteFollowing(followingId);
+    public void deleteFollowing(Long userId, Long followingId){
+        followingRepository.deleteFollowing(userId, followingId);
+        logger.info(String.format("User id: %d and following id: %d was deleted", userId, followingId));
     }
 
     public Set<Long> getFollowingsId(Long userId){
@@ -33,9 +35,9 @@ public class FollowingService {
 
     public Set<Long> getRecommendedUsersId(Long userId){
         Set<Long> recommendedUsersId = new HashSet<>();
-        Set<Long> followingUsersId = followingRepository.getFollowingsId(userId);
-        followingUsersId.forEach(id -> recommendedUsersId.addAll(followingRepository.getFollowingsId(id)));
-        recommendedUsersId.removeAll(followingUsersId);
+        Set<Long> followingsId = getFollowingsId(userId);
+        followingsId.forEach(id -> recommendedUsersId.addAll(getFollowingsId(id)));
+        recommendedUsersId.removeAll(followingsId);
         return recommendedUsersId;
     }
 }

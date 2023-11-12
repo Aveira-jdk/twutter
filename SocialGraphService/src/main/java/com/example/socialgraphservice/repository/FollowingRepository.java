@@ -20,8 +20,8 @@ public interface FollowingRepository extends JpaRepository<RootEntity, Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "DELETE FROM users_followings WHERE following_id =:followingId", nativeQuery = true)
-    void deleteFollowing(Long followingId);
+    @Query(value = "DELETE FROM users_followings WHERE user_id =:userId AND following_id =:followingId", nativeQuery = true)
+    void deleteFollowing(Long userId, Long followingId);
 
     @Transactional
     @Modifying

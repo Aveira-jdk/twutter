@@ -14,14 +14,13 @@ public interface BlockRepository extends JpaRepository<RootEntity, Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "INSERT INTO users_followers (user_id, block_id) VALUES (:userId, :blockId)",
-            nativeQuery = true)
+    @Query(value = "INSERT INTO users_blocks (user_id, block_id) VALUES (:userId, :blockId)", nativeQuery = true)
     void addBlock(Long userId, Long blockId);
 
     @Transactional
     @Modifying
-    @Query(value = "DELETE FROM users_followers WHERE block_id =:blockId", nativeQuery = true)
-    void deleteBlock(Long blockId);
+    @Query(value = "DELETE FROM users_blocks WHERE user_id =:userId AND block_id =:blockId", nativeQuery = true)
+    void deleteBlock(Long userId, Long blockId);
 
     @Transactional
     @Modifying

@@ -18,9 +18,9 @@ public class BlockController {
         blockService.addBlock(userId, blockId);
     }
 
-    @DeleteMapping("/delete-block/{blockId}")
-    public void deleteBlock(@PathVariable Long blockId){
-        blockService.deleteBlock(blockId);
+    @DeleteMapping("/delete-block/{userId}/{blockId}")
+    public void deleteBlock(@PathVariable Long userId, @PathVariable Long blockId){
+        blockService.deleteBlock(userId, blockId);
     }
 
     @GetMapping("/get-blocks/{blockId}")

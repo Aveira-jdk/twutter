@@ -18,9 +18,9 @@ public class FollowerController {
         followerService.addFollower(userId, followerId);
     }
 
-    @DeleteMapping("/delete-follower/{followerId}")
-    public void deleteFollower(@PathVariable Long followerId){
-        followerService.deleteFollower(followerId);
+    @DeleteMapping("/delete-follower/{userId}/{followerId}")
+    public void deleteFollower(@PathVariable Long userId, @PathVariable Long followerId){
+        followerService.deleteFollower(userId, followerId);
     }
 
     @GetMapping("/get-followers/{userId}")
