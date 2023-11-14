@@ -37,18 +37,28 @@ public class ReviewService {
         review.setUserId(reviewRequest.getUserId());
         review.setReview(reviewRequest.getReview());
         review.setReviewDate(LocalDateTime.now());
+        review.setLikeCount(0L);
         review.setTweet(tweet);
 
         reviewRepository.save(review);
     }
 
     @Transactional
-    public void deleteReview(Long tweetId,Long id) {
-        Review review = reviewRepository.findByTweetIdAndReviewId(tweetId,id)
+    public void deleteReview(Long tweetId, Long id) {
+        Review review = reviewRepository.findByTweetIdAndReviewId(tweetId, id)
                 .orElseThrow(() -> new NotFoundException("Review not found - review id " + id));
         reviewLikeService.deleteLikeByReviewId(id);
         reviewRepository.delete(review);
     }
+
+    @Transactional
+    public void deleteReviewsByTweetId(Long id) {
+        List<Review> reviews = reviewRepository.getReviews(id)
+                .orElseThrow(() -> new NotFoundException("Review not found - review id " + id));
+        reviews.forEach(review -> reviewLikeService.deleteLikeByReviewId(review.getId()));
+        reviewRepository.deleteReviewsByTweetId(id);
+    }
+
 }
 
 

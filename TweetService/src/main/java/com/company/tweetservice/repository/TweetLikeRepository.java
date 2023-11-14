@@ -24,5 +24,6 @@ public interface TweetLikeRepository extends JpaRepository<TweetLike, Long> {
 
     @Query(value = "select * from tweet_likes t where t.user_id=:userId and t.tweet_id=:tweetId", nativeQuery = true)
     Optional<TweetLike> findByUserIdAndTweetId(Long userId, Long tweetId);
+
 }
 

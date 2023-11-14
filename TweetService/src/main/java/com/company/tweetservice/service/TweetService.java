@@ -1,20 +1,26 @@
 package com.company.tweetservice.service;
 
+import com.company.tweetservice.entity.Review;
 import com.company.tweetservice.entity.Tweet;
 import com.company.tweetservice.exception.NotFoundException;
 import com.company.tweetservice.model.mapper.TweetMapper;
 import com.company.tweetservice.model.request.TweetRequest;
 import com.company.tweetservice.model.response.TweetResponse;
+import com.company.tweetservice.repository.ReviewRepository;
 import com.company.tweetservice.repository.TweetRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
 public class TweetService {
     private final TweetLikeService tweetLikeService;
+    private final ReviewService reviewService;
+    private final ReviewLikeService reviewLikeService;
     private final TweetRepository tweetRepository;
     private final TweetMapper tweetMapper;
 
@@ -43,6 +49,10 @@ public class TweetService {
         Tweet tweet = tweetRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Tweet not found - tweet id " + id));
         tweetLikeService.deleteLikeByTweetId(id);
+        reviewService.deleteReviewsByTweetId(id);
+        tweet.setReviews(null);
+        tweet.setLikes(null);
+
         tweetRepository.delete(tweet);
     }
 

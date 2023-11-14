@@ -40,6 +40,7 @@ public class TweetLikeService {
             TweetLike newLike = new TweetLike();
             newLike.setUserId(userId);
             newLike.setTweet(tweet);
+            tweetRepository.increaseLikeCount(tweetId);
             tweetLikeRepository.save(newLike);
         }
     }
