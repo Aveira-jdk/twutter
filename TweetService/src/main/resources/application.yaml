@@ -1,6 +1,10 @@
 server:
   port: 8080
+
 spring:
+  application:
+    name: tweet-service
+
   datasource:
     url: jdbc:postgresql://localhost:5432/twitter_tweet
     username: postgres
@@ -19,3 +23,5 @@ spring:
   liquibase:
     enabled: true
     change-log: classpath:db/changelog/changelog-master.yaml
+
+
