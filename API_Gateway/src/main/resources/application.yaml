@@ -1,0 +1,17 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: security
+          uri: lb://AUTH-SERVICE
+          predicates:
+            - Path=/**
+          filters:
+            - name: CustomFilter
+
+        - id: user-service
+          uri:
+  application:
+    name: spring-cloud-gateway-service
+server:
+  port: 8888

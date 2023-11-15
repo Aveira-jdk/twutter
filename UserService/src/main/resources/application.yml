@@ -1,8 +1,8 @@
-server:
-  port: 8084
 spring:
+  application:
+    name: USER-SERVICE
   datasource:
-    url: jdbc:postgresql://localhost:5432/twutter_time_line
+    url: jdbc:postgresql://localhost:5432/twutter_user_service
     username: postgres
     password: cosu2362
   jpa:
@@ -12,14 +12,15 @@ spring:
     open-in-view: false
   sql:
     init:
-      mode: never
+      mode: always
   liquibase:
-    enabled: false
+    enabled: true
     change-log: classpath:db/changelog/db.changelog-master.yaml
-  application:
-    name: TL-SERVICE
+
+server:
+  port: 8081
+
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
-
