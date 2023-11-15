@@ -8,6 +8,9 @@ import com.company.userservice.model.enums.Roles;
 import com.company.userservice.model.mapper.AccountMapper;
 import com.company.userservice.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,11 +22,13 @@ public class AccountService {
     private final AccountRepository accountRepository;
     private final RoleService roleService;
     private final AccountMapper accountMapper;
+    private final PasswordEncoder passwordEncoder;
 
     public Account add(SignUpRequestDto signUpRequestDto) {
         Role role = roleService.findByRoleName(Roles.ROLE_USER);
         if (!accountRepository.existsByUsername(signUpRequestDto.getUsername())) {
             Account account = accountMapper.signUpRequestDTOtoAccount(signUpRequestDto);
+            account.setPassword(passwordEncoder.encode(account.getPassword()));
             return accountRepository.save(account);
         }
         throw new RuntimeException("Account not saved");
@@ -81,6 +86,5 @@ public class AccountService {
     public List<Account> getAllAccounts() {
         return accountRepository.findAll();
     }
-
 
 }
