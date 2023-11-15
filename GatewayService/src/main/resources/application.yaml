@@ -1,0 +1,56 @@
+server:
+  port: 9002
+
+spring:
+  application:
+    name: GATEWAY-SERVICE
+
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+
+#      routes:
+#        - id: USER-SERVICE
+#          uri: lb://USER-SERVICE
+#          predicates:
+#            - Path=/twutter/**
+#
+#        - id: TIMELINE-SERVICE
+#          uri: lb://TIMELINE-SERVICE
+#          predicates:
+#            - Path=/twutter/**
+#
+#        - id: SOCIALGRAPH-SERVICE
+#          uri: lb://SOCIALGRAPH-SERVICE
+#          predicates:
+#            - Path=/twutter/**
+#
+#        - id: TWEET-SERVICE
+#          uri: lb://TWEET-SERVICE
+#          predicates:
+#            - Path=/twitter/**
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+
+
+
+#jwt:
+#  secret: screte-value
+#
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include:
+#          - mappings
+#          - env
+#          - health
+#          - info
