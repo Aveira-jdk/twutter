@@ -19,7 +19,7 @@ public class JwtUtil {
             Claims body = Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody();
             return body;
         } catch (Exception e) {
-            System.out.println(e.getMessage() + " => " + e);
+            System.out.println(e.getMessage() + ":" + e);
         }
         return null;
     }

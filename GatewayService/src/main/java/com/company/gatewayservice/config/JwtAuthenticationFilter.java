@@ -4,7 +4,6 @@ package com.company.gatewayservice.config;
 import com.company.gatewayservice.exception.JwtTokenMalformedException;
 import com.company.gatewayservice.exception.JwtTokenMissingException;
 import com.company.gatewayservice.util.JwtUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.http.HttpStatus;
