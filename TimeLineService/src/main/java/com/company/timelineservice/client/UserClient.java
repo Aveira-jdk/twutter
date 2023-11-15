@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.Set;
 
-@FeignClient(name = "userClient", value = "localhost:8081/twutter")
+@FeignClient(name = "USER-SERVICE")
 public interface UserClient {
 
     @RequestMapping(method = RequestMethod.POST, value = "/users/get-users-by-id")

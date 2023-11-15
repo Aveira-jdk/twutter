@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.Set;
 
-@FeignClient(name = "socialGraphClient", url = "localhost:8082/twutter")
+@FeignClient(name = "SG-SERVICE")
 public interface SocialGraphClient {
 
     @RequestMapping(method = RequestMethod.GET, value = "/followings/get-followings/{userId}")

@@ -3,16 +3,15 @@ package com.company.gatewayservice.util;
 
 import com.company.gatewayservice.exception.JwtTokenMalformedException;
 import com.company.gatewayservice.exception.JwtTokenMissingException;
+import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.SignatureException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-
-import java.security.SignatureException;
 
 @Component
 public class JwtUtil {
 
-    @Value("${jwt.secret}")
-    private String jwtSecret;
+    private String jwtSecret = "secretsecretsecretsecretsecretsecret";
 
     public Claims getClaims(final String token) {
         try {

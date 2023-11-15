@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.Set;
 
-@FeignClient(name = "tweetClient", url = "localhost:8083/twutter")
+@FeignClient(name = "TWEET-SERVICE")
 public interface TweetClient {
     @RequestMapping(method = RequestMethod.POST, value = "/tweets/get-tweets-by-user")
     Set<TweetResponseDTO> getTweetsByUser(@RequestBody Set<Long> usersId);

@@ -11,26 +11,34 @@ spring:
         locator:
           enabled: true
 
-#      routes:
-#        - id: USER-SERVICE
-#          uri: lb://USER-SERVICE
-#          predicates:
-#            - Path=/twutter/**
-#
-#        - id: TIMELINE-SERVICE
-#          uri: lb://TIMELINE-SERVICE
-#          predicates:
-#            - Path=/twutter/**
-#
-#        - id: SOCIALGRAPH-SERVICE
-#          uri: lb://SOCIALGRAPH-SERVICE
-#          predicates:
-#            - Path=/twutter/**
-#
-#        - id: TWEET-SERVICE
-#          uri: lb://TWEET-SERVICE
-#          predicates:
-#            - Path=/twitter/**
+      routes:
+        - id: USER-SERVICE
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/twutter/**
+#          filters:
+#            - name: JwtAuthenticationFilter
+
+        - id: TIMELINE-SERVICE
+          uri: lb://TIMELINE-SERVICE
+          predicates:
+            - Path=/twutter/**
+#          filters:
+#            - name: JwtAuthenticationFilter
+
+        - id: SOCIALGRAPH-SERVICE
+          uri: lb://SOCIALGRAPH-SERVICE
+          predicates:
+            - Path=/twutter/**
+#          filters:
+#            - name: JwtAuthenticationFilter
+
+        - id: TWEET-SERVICE
+          uri: lb://TWEET-SERVICE
+          predicates:
+            - Path=/twitter/**
+#          filters:
+#            - name: JwtAuthenticationFilter
 eureka:
   client:
     fetch-registry: true
