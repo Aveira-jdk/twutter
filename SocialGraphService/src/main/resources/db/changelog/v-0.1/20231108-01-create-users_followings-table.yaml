@@ -1,0 +1,18 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2023110801
+      author: cosqunmammadov
+      changes:
+        - createTable:
+            tableName: users_followings
+            columns:
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: following_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false

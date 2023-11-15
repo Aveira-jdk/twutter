@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: USER-SERVICE
+  datasource:
+    url: jdbc:postgresql://localhost:5432/twutter_user_service
+    username: postgres
+    password: cosu2362
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    open-in-view: false
+  sql:
+    init:
+      mode: always
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+
+server:
+  port: 8081
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/

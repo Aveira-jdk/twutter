@@ -1,0 +1,42 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2023111202
+      author: cosqunmammadov
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: first_name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: age
+                  type: INT
+              - column:
+                  name: email
+                  type: varchar(60)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: contact_number
+                  type: varchar(25)
+              - column:
+                  name: account_id
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk-user-account
+                    references: accounts(id)
