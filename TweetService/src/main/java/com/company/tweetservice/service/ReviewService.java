@@ -24,8 +24,7 @@ public class ReviewService {
     private final ReviewLikeService reviewLikeService;
 
     public List<ReviewResponse> getReviews(Long tweetId) {
-        List<Review> reviews = reviewRepository.getReviews(tweetId)
-                .orElseThrow(() -> new NotFoundException("Review not found - review id " + tweetId));
+        List<Review> reviews = reviewRepository.getReviews(tweetId);
         return reviewMapper.toTweetResponse(reviews);
     }
 
@@ -53,8 +52,7 @@ public class ReviewService {
 
     @Transactional
     public void deleteReviewsByTweetId(Long id) {
-        List<Review> reviews = reviewRepository.getReviews(id)
-                .orElseThrow(() -> new NotFoundException("Review not found - review id " + id));
+        List<Review> reviews = reviewRepository.getReviews(id);
         reviews.forEach(review -> reviewLikeService.deleteLikeByReviewId(review.getId()));
         reviewRepository.deleteReviewsByTweetId(id);
     }

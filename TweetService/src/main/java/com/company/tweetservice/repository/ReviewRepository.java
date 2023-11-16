@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public interface ReviewRepository extends JpaRepository<Review,Long> {
     @Query(value = "select * from reviews where tweet_id=:tweetId", nativeQuery = true)
-    Optional<List<Review>> getReviews(Long tweetId);
+    List<Review> getReviews(Long tweetId);
 
     @Query(value = "select * from reviews where id=:reviewId", nativeQuery = true)
     Optional<Review> findReviewById(Long reviewId);
