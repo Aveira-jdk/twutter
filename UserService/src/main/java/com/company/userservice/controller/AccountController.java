@@ -1,6 +1,7 @@
 package com.company.userservice.controller;
 
 import com.company.userservice.model.dto.request.AccountRequestDto;
+import com.company.userservice.model.dto.response.AccountResponseDto;
 import com.company.userservice.model.entity.Account;
 import com.company.userservice.service.AccountService;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/twutter/accounts")
+@RequestMapping("/twutter/USER/accounts")
 public class AccountController {
 
     private final AccountService accountService;
@@ -32,7 +33,7 @@ public class AccountController {
     }
 
     @GetMapping("/get-by-username")
-    public Account getByUsername(@RequestParam String username){
+    public AccountResponseDto getByUsername(@RequestParam String username){
         return accountService.getByUsername(username);
     }
 

@@ -32,7 +32,7 @@ public class TimelineService {
         return getTimelineTweets(followingsId, tweets, users);
     }
 
-    private Set<Long> getFollowingsId(Long userId){
+    public Set<Long> getFollowingsId(Long userId){
         Set<Long> followingsId = socialGraphClient.getFollowingsId(userId);
         logger.info("The getFollowings method on socialGraphClient was called");
         return followingsId;

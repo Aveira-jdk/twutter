@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.function.Predicate;
 
 @Component
-
 public class JwtAuthenticationFilter implements GatewayFilter {
 
     private  JwtUtil jwtUtil;

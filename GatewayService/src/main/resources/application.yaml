@@ -16,8 +16,8 @@ spring:
           uri: lb://USER-SERVICE
           predicates:
             - Path=/twutter/**
-#          filters:
-#            - name: JwtAuthenticationFilter
+          filters:
+            - name: JwtAuthenticationFilter
 
         - id: TIMELINE-SERVICE
           uri: lb://TIMELINE-SERVICE

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/twitter/tweets")
+@RequestMapping("/twutter/TWEET/tweets")
 @RequiredArgsConstructor
 public class TweetController {
     private final TweetService tweetService;

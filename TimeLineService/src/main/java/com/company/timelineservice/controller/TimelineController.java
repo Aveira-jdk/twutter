@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/twutter/time-line")
+@RequestMapping("/twutter/TIME-LINE")
 @RequiredArgsConstructor
 public class TimelineController {
 
@@ -20,5 +20,10 @@ public class TimelineController {
     @GetMapping("/get-timeline-tweets/{userId}")
     public Set<TimelineTweet> getTimelineTweets(@PathVariable Long userId){
         return timeLineService.getTimelineTweets(userId);
+    }
+
+    @GetMapping("/getId")
+    public Set<Long> getFollowingsId(){
+        return timeLineService.getFollowingsId(1L);
     }
 }

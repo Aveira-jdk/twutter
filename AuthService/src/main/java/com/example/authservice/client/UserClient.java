@@ -2,13 +2,13 @@ package com.example.authservice.client;
 
 import com.example.authservice.model.User;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-@FeignClient(name = "USER-SERVICE")
+@FeignClient(name = "USER-SERVICE", url = "localhost:8081")
 public interface UserClient {
 
-    @RequestMapping(method = RequestMethod.GET, value = "/accounts/get-by-username")
+    @RequestMapping(value = "/twutter/accounts/get-by-username", method = RequestMethod.GET)
+    @ResponseBody
     User getUserByUsername(@RequestParam String username);
 }

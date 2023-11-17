@@ -15,6 +15,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class AccountResponseDto {
 
+    Long id;
     String username;
     String password;
     boolean isActive;

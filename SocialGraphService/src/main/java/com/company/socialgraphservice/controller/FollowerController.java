@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/twutter/followers")
+@RequestMapping("/twutter/SOCIAL-GRAPH/followers")
 @RequiredArgsConstructor
 public class FollowerController {
 

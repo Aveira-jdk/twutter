@@ -21,14 +21,14 @@ import java.util.stream.Collectors;
 public class MyUserDetail implements UserDetails {
 
     @Getter
-    Long id;
+    String id;
     String username;
     String password;
     boolean isActive;
     Set<Role> roles;
 
     public MyUserDetail(User user){
-        this.id = user.getId();
+        this.id = user.getId().toString();
         this.username = user.getUsername();
         this.password = user.getPassword();
         this.roles = user.getRoles();

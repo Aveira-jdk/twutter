@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/twutter/users")
+@RequestMapping("/twutter/USER/users")
 @RequiredArgsConstructor
 public class UserController {
 

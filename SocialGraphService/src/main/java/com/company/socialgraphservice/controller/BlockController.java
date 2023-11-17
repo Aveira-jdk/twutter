@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/twutter/blocks")
+@RequestMapping("/twutter/SOCIAL-GRAPH/blocks")
 @RequiredArgsConstructor
 public class BlockController {
 

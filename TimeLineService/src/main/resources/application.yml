@@ -4,13 +4,10 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
-    show-sql: true
     open-in-view: false
-  sql:
-    init:
-      mode: never
+
   application:
-    name: TL-SERVICE
+    name: TIME-LINE-SERVICE
 eureka:
   client:
     service-url:

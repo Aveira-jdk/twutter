@@ -45,7 +45,7 @@ public class Account {
     LocalDateTime createdAt;
 
     @UpdateTimestamp
-    @Column(name = "update_at", columnDefinition = "timestamp default now()")
+    @Column(name = "updated_at", columnDefinition = "timestamp default now()")
     LocalDateTime updatedAt;
 
 }

@@ -2,14 +2,13 @@ package com.company.userservice.service;
 
 import com.company.userservice.model.dto.request.AccountRequestDto;
 import com.company.userservice.model.dto.request.SignUpRequestDto;
+import com.company.userservice.model.dto.response.AccountResponseDto;
 import com.company.userservice.model.entity.Account;
 import com.company.userservice.model.entity.Role;
 import com.company.userservice.model.enums.Roles;
 import com.company.userservice.model.mapper.AccountMapper;
 import com.company.userservice.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -71,8 +70,9 @@ public class AccountService {
         accountRepository.delete(account);
     }
 
-    public Account getByUsername(String username) {
-        return accountRepository.findByUsername(username);
+    public AccountResponseDto getByUsername(String username) {
+        Account account = accountRepository.findByUsername(username);
+        return accountMapper.accountToAccountResponseDTO(account);
     }
 
     public List<Account> getByRoleName(String role) {

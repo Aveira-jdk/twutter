@@ -1,20 +1,21 @@
 spring:
-  cloud:
-    gateway:
-      routes:
-        - id: security
-          uri: lb://AUTH-SERVICE
-          predicates:
-            - Path=/**
-          filters:
-            - name: CustomFilter
-
-        - id: user-service
-          uri: lb://USER-SERVICE
-          predicates:
-            - Path=/users/**
-          filters:
-            - name: CustomFilter
+#  cloud:
+#    gateway:
+#      routes:
+#        - id: security
+#          uri: lb://AUTH-SERVICE
+#          filters:
+#            - name: PreGatewayFilterFactory
+#          predicates:
+#            - Path=/twutter/**
+#
+#
+#        - id: user-service
+#          uri: lb://USER-SERVICE
+#          filters:
+#            - name: PreGatewayFilterFactory
+#          predicates:
+#            - Path=/twutter/users/**
   application:
     name: spring-cloud-gateway-service
 eureka:
