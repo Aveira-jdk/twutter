@@ -36,7 +36,7 @@ public class ReviewService {
         review.setUserId(reviewRequest.getUserId());
         review.setReview(reviewRequest.getReview());
         review.setReviewDate(LocalDateTime.now());
-        review.setLikeCount(0L);
+        review.setLikeCount(0);
         review.setTweet(tweet);
 
         reviewRepository.save(review);

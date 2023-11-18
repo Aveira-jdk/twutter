@@ -25,7 +25,7 @@ public class Review {
     String review;
 
     @Column(name = "like_count",columnDefinition = "int default 0")
-    Long likeCount;
+    int likeCount;
 
     @Column(name = "review_date",columnDefinition = "timestamp default now()")
     LocalDateTime reviewDate;

@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public record ReviewResponse (
         String review,
-        long likeCount,
+        int likeCount,
         LocalDateTime reviewDate,
         Long userId
 ){

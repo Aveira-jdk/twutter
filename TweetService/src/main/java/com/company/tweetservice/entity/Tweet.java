@@ -26,7 +26,7 @@ public class Tweet {
     String tweet;
 
     @Column(name = "like_count",columnDefinition = "int default 0")
-    Long likeCount;
+    int likeCount;
 
     @Column(name = "tweet_date",columnDefinition = "timestamp default now()")
     LocalDateTime tweetDate;
@@ -39,8 +39,5 @@ public class Tweet {
 
     @OneToMany(mappedBy = "tweet")
     Set<TweetLike> likes;
-
-    @OneToMany(mappedBy = "tweet")
-    Set<Retweet> retweets;
 }
 

@@ -40,6 +40,7 @@ public class TweetService {
         Tweet tweet = Tweet.builder()
                 .tweet(tweetRequest.getTweet())
                 .tweetDate(LocalDateTime.now())
+                .likeCount(0)
                 .userId(userId)
                 .build();
         tweetRepository.save(tweet);

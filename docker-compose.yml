@@ -1,0 +1,50 @@
+version: '0.1'
+services:
+  twitter_tweet:
+    container_name: twitter_tweet
+    image: 'docker-spring-boot-postgres:latest'
+    restart: always
+    networks:
+      - twitter-network
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/twitter_tweet
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=1903
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    ports:
+      - '5432:5432'
+    volumes:
+      - db_data:/var/lib/postgres
+  twutter_user_services:
+    container_name: twutter_user_services
+    image: 'docker-spring-boot-postgres:latest'
+    restart: always
+    networks:
+      - twitter-network
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/twutter_user_services
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=1903
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    ports:
+      - '5432:5432'
+    volumes:
+      - db_data:/var/lib/postgres
+  twutter_social_graph:
+    container_name: twutter_user_services
+    image: 'docker-spring-boot-postgres:latest'
+    restart: always
+    networks:
+      - twitter-network
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/twutter_user_services
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=1903
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    ports:
+      - '5432:5432'
+    volumes:
+      - db_data:/var/lib/postgres
+
+networks:
+  twitter-network:

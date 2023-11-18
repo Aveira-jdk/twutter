@@ -1,0 +1,86 @@
+version: '0.1'
+services:
+  eureka-service:
+    container_name: eureka-service
+    build: ./eureka-service
+    restart: always
+    networks:
+      - twitter-network
+    ports:
+      - '8761:8761'
+  gateway-service:
+    container_name: gateway-service
+    build: ./gateway-service
+    restart: always
+    networks:
+      - twitter-network
+    ports:
+      - '9002:9002'
+    environment:
+      - EUREKA_URL=http://eureka-service:8761/eureka
+    links:
+      - "eureka-service"
+    depends_on:
+      - eureka-service
+  tweet-service:
+    container_name: tweet-service
+    build: ./tweet-service
+    networks:
+      - twitter-network
+    ports:
+      - '8080:8080'
+    environment:
+      - HOST_DB=jdbc:postgresql://localhost:5432/twitter_tweet?useSSL=false
+      - EUREKA_URL=http://eureka-service:8761/eureka
+    links:
+      - "eureka-service"
+    depends_on:
+      - eureka-service
+      - gateway-service
+  user-service:
+    container_name: user-service
+    build: ./user-service
+    networks:
+      - twitter-network
+    ports:
+      - '8081:8081'
+    environment:
+      - HOST_DB=jdbc:postgresql://localhost:5432/twutter_user_service?useSSL=false
+      - EUREKA_URL=http://eureka-service:8761/eureka
+    links:
+      - "eureka-service"
+    depends_on:
+      - eureka-service
+      - gateway-service
+  socialgraph-service:
+    container_name: socialgraph-service
+    build: ./socialgraph-service
+    networks:
+      - twitter-network
+    ports:
+      - '8082:8082'
+    environment:
+      - HOST_DB=jdbc:postgresql://localhost:5432/twutter_social_graph?useSSL=false
+      - EUREKA_URL=http://eureka-service:8761/eureka
+    links:
+      - "eureka-service"
+    depends_on:
+      - eureka-service
+      - gateway-service
+  timeline-service:
+    container_name: timeline-service
+    build: ./timeline-service
+    networks:
+      - twitter-network
+    ports:
+      - '8084:8084'
+    environment:
+      - EUREKA_URL=http://eureka-service:8761/eureka
+    links:
+      - "eureka-service"
+    depends_on:
+      - eureka-service
+      - gateway-service
+
+networks:
+  twitter-network:
