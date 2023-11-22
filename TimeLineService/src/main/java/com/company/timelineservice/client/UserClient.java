@@ -12,6 +12,6 @@ import java.util.Set;
 @FeignClient(name = "USER-SERVICE", url = "localhost:8081")
 public interface UserClient {
 
-    @PostMapping("/twutter/users/get-users-by-id")
+    @PostMapping("/twutter/USER/users/get-users-by-id")
     Set<UserResponseDTO> getUsersById(@RequestBody Set<Long> usersId);
 }

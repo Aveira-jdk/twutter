@@ -31,7 +31,7 @@ public class User {
     @Column(name = "contact_number")
     String contactNumber;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "account_id")
     Account account;
 

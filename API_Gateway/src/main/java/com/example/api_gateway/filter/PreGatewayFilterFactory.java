@@ -1,6 +1,8 @@
 package com.example.api_gateway.filter;
 
 import com.example.api_gateway.service.JwtService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
@@ -10,9 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class PreGatewayFilterFactory extends AbstractGatewayFilterFactory<PreGatewayFilterFactory.Config> {
 
-    {
-        System.out.println("PreGatewayFilterFactory object is created");
-    }
+    Logger logger = LoggerFactory.getLogger(PreGatewayFilterFactory.class);
 
     @Autowired
     private RouteValidator validator;
@@ -28,19 +28,30 @@ public class PreGatewayFilterFactory extends AbstractGatewayFilterFactory<PreGat
     public GatewayFilter apply(Config config) {
         return ((exchange, chain) -> {
             String path = exchange.getRequest().getURI().getPath();
+            HttpHeaders headers = exchange.getRequest().getHeaders();
+
             if (validator.isSecured.test(exchange.getRequest())) {
                 //header contains token or not
-                if (!exchange.getRequest().getHeaders().containsKey(HttpHeaders.AUTHORIZATION)) {
+                if (!headers.containsKey(HttpHeaders.AUTHORIZATION)) {
                     throw new RuntimeException("missing authorization header");
                 }
+
                 if (path.contains("extract-id")){
-                    throw new RuntimeException("access denied");
+                    throw new RuntimeException("This endpoint not for Users or Admins");
                 }
 
-                String authHeader = exchange.getRequest().getHeaders().get(HttpHeaders.AUTHORIZATION).get(0);
+                String authHeader = headers.get(HttpHeaders.AUTHORIZATION).get(0);
                 if (authHeader != null && authHeader.startsWith("Bearer ")) {
                     authHeader = authHeader.substring(7);
                 }
+
+                String role = jwtService.extractAllClaims(authHeader).get("role").toString();
+                if (path.contains("role") || path.contains("all-accounts") || path.contains("delete-user")
+                        || path.contains("get-by-username") || path.contains("by-id")){
+                    if (!role.contains("ROLE_ADMIN"))
+                        throw new RuntimeException("This endpoint is for Admins");
+                }
+
                 try {
                     jwtService.isTokenValid(authHeader);
 

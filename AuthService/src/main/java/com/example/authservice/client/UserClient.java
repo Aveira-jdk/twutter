@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 @FeignClient(name = "USER-SERVICE", url = "localhost:8081")
 public interface UserClient {
 
-    @RequestMapping(value = "/twutter/accounts/get-by-username", method = RequestMethod.GET)
+    @RequestMapping(value = "/twutter/USER/accounts/get-by-username", method = RequestMethod.GET)
     @ResponseBody
     User getUserByUsername(@RequestParam String username);
 }

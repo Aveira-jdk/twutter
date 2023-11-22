@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -24,10 +25,15 @@ public class TweetService {
     private final TweetRepository tweetRepository;
     private final TweetMapper tweetMapper;
 
-    public TweetResponse listTweetsByUser(Long userId) {
-        Tweet tweets = tweetRepository.findByUserId(userId)
-                .orElseThrow(() -> new NotFoundException("Tweets not found - userId id " + userId));
+    public List<TweetResponse> tweetsByUser(Long userId) {
+        List<Tweet> tweets = tweetRepository.findByUserId(userId);
         return tweetMapper.toTweetResponse(tweets);
+    }
+
+    public Set<TweetResponse> listTweetsByUser(Set<Long> userId) {
+        Set<Tweet> tweets = new HashSet<>();
+        userId.forEach(id -> tweets.addAll(tweetRepository.getByUserId(id)));
+        return tweetMapper.toTweetResponseSet(tweets);
     }
 
     public TweetResponse getTweet(Long id) {

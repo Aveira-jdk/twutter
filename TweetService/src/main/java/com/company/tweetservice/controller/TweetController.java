@@ -1,14 +1,18 @@
 package com.company.tweetservice.controller;
 
+import com.company.tweetservice.client.AuthClient;
 import com.company.tweetservice.model.request.TweetRequest;
 import com.company.tweetservice.model.response.TweetLikeResponse;
 import com.company.tweetservice.model.response.TweetResponse;
 import com.company.tweetservice.service.TweetLikeService;
 import com.company.tweetservice.service.TweetService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/twutter/TWEET/tweets")
@@ -16,16 +20,26 @@ import java.util.List;
 public class TweetController {
     private final TweetService tweetService;
     private final TweetLikeService tweetLikeService;
+    private final AuthClient authClient;
 
-    @PostMapping("/add-tweet/user-id/{user-id}")
-    public void createTweet(@PathVariable("user-id") Long userId,
+    @PostMapping("/add-tweet")
+    public void createTweet(@RequestHeader(name = "Authorization") String authorizationHeader,
                             @RequestBody TweetRequest tweetRequest) {
+        String token = authorizationHeader.replace("Bearer ", "");
+        Long userId = authClient.extractId(token);
         tweetService.createTweet(userId, tweetRequest);
     }
 
     @GetMapping("/user-id")
-    public TweetResponse listTweetsByUser(@RequestParam("userId") Long userId) {
-        return tweetService.listTweetsByUser(userId);
+    public List<TweetResponse> tweetsByUser(@RequestParam("userId") Long userId) {
+        return tweetService.tweetsByUser(userId);
+    }
+
+    @PostMapping("/get-tweets-by-user")
+    public Set<TweetResponse> listTweetsByUser(@RequestBody Set<Long> userId) {
+        Set<Long> set = new HashSet<>(userId);
+        LoggerFactory.getLogger(TweetController.class).info("userId: {}", userId);
+        return tweetService.listTweetsByUser(set);
     }
 
     @GetMapping("/tweet-id/{id}")
@@ -39,8 +53,10 @@ public class TweetController {
     }
 
     @PatchMapping("/like")
-    public void tweetLike(@RequestParam("user-id")Long userId,
+    public void tweetLike(@RequestHeader(name = "Authorization") String authorizationHeader,
                           @RequestParam("tweet-id")Long tweetId) {
+        String token = authorizationHeader.replace("Bearer ", "");
+        Long userId = authClient.extractId(token);
         tweetLikeService.tweetLike(userId,tweetId);
     }
 

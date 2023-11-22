@@ -12,7 +12,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -28,6 +30,9 @@ public class AccountService {
         if (!accountRepository.existsByUsername(signUpRequestDto.getUsername())) {
             Account account = accountMapper.signUpRequestDTOtoAccount(signUpRequestDto);
             account.setPassword(passwordEncoder.encode(account.getPassword()));
+            Set<Role> roles = new HashSet<>();
+            roles.add(role);
+            account.setRoles(roles);
             return accountRepository.save(account);
         }
         throw new RuntimeException("Account not saved");
@@ -67,6 +72,8 @@ public class AccountService {
     }
 
     public void delete(Account account) {
+        account.setRoles(null);
+        roleService.deleteAccount(account.getId());
         accountRepository.delete(account);
     }
 

@@ -1,5 +1,6 @@
 package com.company.socialgraphservice.service;
 
+import com.company.socialgraphservice.client.AuthClient;
 import com.company.socialgraphservice.repository.BlockRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -13,14 +14,13 @@ import java.util.Set;
 public class BlockService {
 
     private final BlockRepository blockRepository;
-    private final FollowerService followerService;
     private final FollowingService followingService;
     Logger logger = LoggerFactory.getLogger(BlockService.class);
 
     public void addBlock(Long userId, Long blockId){
         blockRepository.addBlock(userId, blockId);
         logger.info(String.format("User id: %d and block id: %d was added", userId, blockId));
-        followerService.deleteFollower(userId, blockId);
+        followingService.deleteFollower(userId, blockId);
         logger.info(String.format("User id: %d and follower id: %d was deleted", userId, blockId));
         followingService.deleteFollowing(userId, blockId);
         logger.info(String.format("User id: %d and following id: %d was deleted", userId, blockId));

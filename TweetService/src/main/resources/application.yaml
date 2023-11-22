@@ -1,14 +1,14 @@
 server:
-  port: 0
+  port: 8083
 
 spring:
   application:
-    name: Tweet-Service
+    name: TWEET-SERVICE
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/twitter_tweet
+    url: jdbc:postgresql://localhost:5432/twutter-tweet-service
     username: postgres
-    password: 1903
+    password: cosu2362
 
   jpa:
     hibernate:

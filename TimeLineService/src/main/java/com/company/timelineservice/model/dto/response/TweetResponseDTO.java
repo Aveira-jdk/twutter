@@ -13,9 +13,8 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TweetResponseDTO {
-    String text;
-    int likeCount;
+    String tweet;
+    long likeCount;
     LocalDateTime tweetDate;
-    Set<ReviewResponseDTO> reviews;
     Long userId;
 }

@@ -1,5 +1,6 @@
 package com.company.tweetservice.controller;
 
+import com.company.tweetservice.client.AuthClient;
 import com.company.tweetservice.model.request.ReviewRequest;
 import com.company.tweetservice.model.response.ReviewLikeResponse;
 import com.company.tweetservice.model.response.ReviewResponse;
@@ -16,6 +17,7 @@ import java.util.List;
 public class ReviewController {
     private final ReviewService reviewService;
     private final ReviewLikeService reviewLikeService;
+    private final AuthClient authClient;
 
     @GetMapping("/tweet-id")
     public List<ReviewResponse> getReviews(@RequestParam("tweetId") Long tweetId) {
@@ -35,8 +37,10 @@ public class ReviewController {
     }
 
     @PatchMapping("/like")
-    public void reviewLike(@RequestParam("user-id") Long userId,
+    public void reviewLike(@RequestHeader(name = "Authorization") String authorizationHeader,
                            @RequestParam("tweet-id") Long reviewId) {
+        String token = authorizationHeader.replace("Bearer ", "");
+        Long userId = authClient.extractId(token);
         reviewLikeService.reviewLike(userId,reviewId);
     }
 
@@ -45,9 +49,11 @@ public class ReviewController {
         return reviewLikeService.getLikes(reviewId);
     }
 
-    @DeleteMapping("/delete-like/user-id/{user-id}/review-id/{review-id}")
-    public void deleteLikeByReviewIdAndUserId(@PathVariable("user-id") Long userId,
+    @DeleteMapping("/delete-like/review-id/{review-id}")
+    public void deleteLikeByReviewIdAndUserId(@RequestHeader(name = "Authorization") String authorizationHeader,
                                               @PathVariable("review-id") Long reviewId) {
+        String token = authorizationHeader.replace("Bearer ", "");
+        Long userId = authClient.extractId(token);
         reviewLikeService.deleteLikeByUserIdAndReviewId(userId,reviewId);
     }
 

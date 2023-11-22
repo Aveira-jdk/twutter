@@ -38,8 +38,8 @@ public class UserService {
     @Transactional(rollbackFor = RuntimeException.class)
     public void add(SignUpRequestDto signUpRequestDto) {
         Account account = accountService.add(signUpRequestDto);
-
         User user = userMapper.signUpRequestDtoToUser(signUpRequestDto);
+        user.setAccount(account);
         userRepository.save(user);
     }
 
@@ -56,8 +56,8 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public void delete(String username) {
-        User user = getUserByUsername(username);
+    public void delete(Long userId) {
+        User user = getUserById(userId);
         Account account = user.getAccount();
         user.setAccount(null);
         userRepository.delete(user);

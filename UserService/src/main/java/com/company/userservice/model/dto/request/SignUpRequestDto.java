@@ -27,5 +27,6 @@ public class SignUpRequestDto {
 
     @Email
     String email;
+    int age;
     String contactNumber;
 }

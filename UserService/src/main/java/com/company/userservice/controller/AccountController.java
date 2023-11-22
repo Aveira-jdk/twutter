@@ -16,20 +16,20 @@ public class AccountController {
 
     private final AccountService accountService;
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public void update(@PathVariable String id,
                        @RequestBody AccountRequestDto accountRequestDto){
         accountService.update(id, accountRequestDto);
     }
 
-    @PatchMapping("add-role/{id}")
+    @PatchMapping("/add-role/{id}")
     public void addRole(@PathVariable String id, @RequestParam String roleName){
         accountService.addRole(id, roleName);
     }
 
-    @PatchMapping("delete-role/{id}")
+    @PatchMapping("/delete-role/{id}")
     public void deleteRole(@PathVariable String id, @RequestParam String roleName){
-        accountService.addRole(id, roleName);
+        accountService.deleteRole(id, roleName);
     }
 
     @GetMapping("/get-by-username")

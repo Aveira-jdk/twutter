@@ -16,11 +16,11 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class MyUserDetail implements UserDetails {
 
-    @Getter
     String id;
     String username;
     String password;

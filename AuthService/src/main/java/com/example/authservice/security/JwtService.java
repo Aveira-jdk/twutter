@@ -38,6 +38,7 @@ public class JwtService {
         MyUserDetail myUserDetail = null;
         if (userDetails instanceof MyUserDetail) 
             myUserDetail = (MyUserDetail) userDetails;
+        extraClaims.put("role", myUserDetail.getRoles());
         
         System.out.println(SECRET_KEY);
         return Jwts.builder()
@@ -45,7 +46,7 @@ public class JwtService {
                 .setSubject(userDetails.getUsername())
                 .setId(myUserDetail.getId())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 5))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 300))
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
                 .compact();
     }

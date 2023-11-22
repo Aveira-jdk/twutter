@@ -7,11 +7,16 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public interface TweetRepository extends JpaRepository<Tweet, Long> {
     @Query("select t from Tweet t where t.userId=:userId")
-    Optional<Tweet> findByUserId(@Param("userId") Long userId);
+    List<Tweet> findByUserId(@Param("userId") Long userId);
+
+    @Query("select t from Tweet t where t.userId=:userId")
+    Set<Tweet> getByUserId(@Param("userId") Long userId);
 
     @Query("select t from Tweet t where t.id=:tweetId")
     Optional<Tweet> getTweetByTweetId(Long tweetId);

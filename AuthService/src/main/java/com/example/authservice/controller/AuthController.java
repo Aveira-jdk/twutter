@@ -20,12 +20,8 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;
-
     private final UserDetailsService userDetailsService;
-
     private final JwtService jwtService;
-    private final UserClient userClient;
-
 
     @PostMapping("/login")
     public AuthResponse login(@RequestBody AuthRequest request){
@@ -40,13 +36,8 @@ public class AuthController {
         return new AuthResponse(jwtToken);
     }
 
-    @GetMapping("/user/{username}")
-    public User getUser(@PathVariable String username){
-        return userClient.getUserByUsername(username);
-    }
-
     @GetMapping("/extract-id")
-    public String getStr(){
-        return "asdfg";
+    public Long extractId(@RequestParam String token){
+        return Long.parseLong(jwtService.ectractId(token));
     }
 }
