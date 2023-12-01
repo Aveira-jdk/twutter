@@ -43,9 +43,9 @@ public class ReviewService {
     }
 
     @Transactional
-    public void deleteReview(Long tweetId, Long id) {
-        Review review = reviewRepository.findByTweetIdAndReviewId(tweetId, id)
-                .orElseThrow(() -> new NotFoundException("Review not found - review id " + id));
+    public void deleteReview(Long id) {
+        Review review = reviewRepository.findReviewById(id)
+                        .orElseThrow(()->new NotFoundException("Review not found"));
         reviewLikeService.deleteLikeByReviewId(id);
         reviewRepository.delete(review);
     }
