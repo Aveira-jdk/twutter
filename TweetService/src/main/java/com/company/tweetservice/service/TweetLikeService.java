@@ -23,7 +23,9 @@ public class TweetLikeService {
     private final LikeMapper likeMapper;
 
     public List<TweetLikeResponse> getLikes(Long tweetId) {
-        List<TweetLike> likes = tweetLikeRepository.getLikes(tweetId);
+        List<TweetLike> likes = tweetLikeRepository.getLikes(tweetId)
+                .orElseThrow(() -> new NotFoundException("Tweet not found - tweet id " + tweetId));
+
         return likeMapper.toTweetLikeResponse(likes);
     }
 

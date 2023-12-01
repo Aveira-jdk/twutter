@@ -12,7 +12,7 @@ import java.util.Optional;
 
 public interface TweetLikeRepository extends JpaRepository<TweetLike, Long> {
     @Query(value = "select * from tweet_likes t where t.tweet_id=:tweetId", nativeQuery = true)
-    List<TweetLike> getLikes(@Param("tweetId") Long tweetId);
+    Optional<List<TweetLike>> getLikes(@Param("tweetId") Long tweetId);
 
     @Modifying
     @Query("delete from TweetLike t where t.tweet.id =:tweetId")
